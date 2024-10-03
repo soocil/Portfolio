@@ -1,50 +1,83 @@
-.HomeContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.HomeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.namedescimg{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.namedescimg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .name {
-    font-size: 48px;
+  font-size: 48px;
   font-family: "Montserrat";
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
   font-optical-sizing: auto;
   font-style: normal;
 }
 
+
+/* Inter dark font  */
 .subname {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
 }
-.namedesc{
-    opacity: 0.7;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-size: 16px;
-    font-weight: 500;
-    font-style: normal;
-}   
 
-.profileimage{
-   
-    border-radius: 50%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    box-sizing: content-box;
-    filter: grayscale(100%);    
-    object-fit: cover;
-    
-    
 
+/* Light Inter font */
+.namedesc {
+  opacity: 0.7;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.profileimage {
+
+  border-radius: 50%;
+
+  filter: grayscale(100%);
+  object-fit: cover;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  visibility: hidden;
+/* opacity o-100 fade in effect */
+  animation: fadeIn 2.5s;
+
+
+
+
+
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 768px) {
+  .profileimage {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .profileimage{
+    width: 80%;
+  }
 }
