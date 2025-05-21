@@ -1,22 +1,34 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Menu, X, Moon, Sun, SquareChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 
-export default function NavBar() {
+
+
+interface NavBarProps {
+  scrollToSection: (ref: React.RefObject<HTMLDivElement>) => void
+  aboutRef: React.RefObject<HTMLDivElement>
+  projectsRef: React.RefObject<HTMLDivElement>
+  skillsRef: React.RefObject<HTMLDivElement>
+  contactRef: React.RefObject<HTMLDivElement>
+}
+
+export default function NavBar({ scrollToSection, aboutRef, projectsRef, skillsRef, contactRef }: NavBarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const { theme, setTheme } = useTheme()
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
   const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", ref: aboutRef },
+    { name: "Skills", ref: skillsRef },
+    { name: "Projects", ref: projectsRef },
+    { name: "Contact", ref: contactRef },
   ]
 
   return (
@@ -37,16 +49,16 @@ export default function NavBar() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item, index) => (
-              <motion.a
+              <motion.button
                 key={item.name}
-                href={item.href}
+                onClick={() => scrollToSection(item.ref)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 className="text-sm font-medium transition-colors hover:text-primary"
               >
                 {item.name}
-              </motion.a>
+              </motion.button>
             ))}
           </nav>
 
@@ -54,7 +66,7 @@ export default function NavBar() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => setTheme(theme === "dark" ? "dark" : "light")}
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -79,14 +91,16 @@ export default function NavBar() {
         >
           <div className="container mx-auto px-4 py-4 space-y-4">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                className="block py-2 text-sm font-medium hover:text-primary"
-                onClick={toggleMenu}
+                onClick={() => {
+                  scrollToSection(item.ref)
+                  toggleMenu()
+                }}
+                className="block py-2 text-sm font-medium hover:text-primary w-full text-left"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </div>
         </motion.div>

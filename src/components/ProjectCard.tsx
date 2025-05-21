@@ -29,12 +29,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
     >
       <Card className="overflow-hidden h-full flex flex-col group">
         <div className="relative h-48 overflow-hidden">
-          <Image
-            src={project.image || "/placeholder.svg"}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-          />
+          <div className="absolute ">
+            <Image
+              src={project.image }
+              alt=""
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
             <Button size="icon" variant="ghost" className="text-white rounded-full">
               <Github className="h-5 w-5" />
