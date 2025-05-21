@@ -8,26 +8,13 @@ export default function HeroCanvas() {
   const { theme } = useTheme()
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    const canvas = canvasRef.current!
+    const ctx = canvas?.getContext("2d")!
+    if (!canvas || !ctx) return
 
     let animationFrameId: number
-    let particles: Particle[] = []
     const particleCount = 100
     const isDark = theme === "dark"
-
-    // Set canvas dimensions
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-      initParticles()
-    }
-
-    window.addEventListener("resize", resizeCanvas)
-    resizeCanvas()
 
     class Particle {
       x: number
@@ -67,24 +54,29 @@ export default function HeroCanvas() {
       }
     }
 
-    function initParticles() {
+    let particles: Particle[] = []
+
+    const initParticles = () => {
       particles = []
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle())
       }
     }
 
-    function connectParticles() {
+    const connectParticles = () => {
       const maxDistance = 150
       for (let i = 0; i < particles.length; i++) {
-        for (let j = i; j < particles.length; j++) {
+        for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
           const dy = particles[i].y - particles[j].y
           const distance = Math.sqrt(dx * dx + dy * dy)
 
           if (distance < maxDistance) {
             const opacity = 1 - distance / maxDistance
-            ctx.strokeStyle = isDark ? `rgba(255, 255, 255, ${opacity * 0.15})` : `rgba(0, 0, 0, ${opacity * 0.08})`
+            ctx.strokeStyle = isDark
+              ? `rgba(255, 255, 255, ${opacity * 0.15})`
+              : `rgba(0, 0, 0, ${opacity * 0.08})`
+
             ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
@@ -95,25 +87,38 @@ export default function HeroCanvas() {
       }
     }
 
-    function animate() {
+    const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update()
-        particles[i].draw()
+      for (const particle of particles) {
+        particle.update()
+        particle.draw()
       }
 
       connectParticles()
       animationFrameId = requestAnimationFrame(animate)
     }
 
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+      initParticles()
+    }
+
+    window.addEventListener("resize", resizeCanvas)
+    resizeCanvas()
     animate()
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas)
       cancelAnimationFrame(animationFrameId)
+      window.removeEventListener("resize", resizeCanvas)
     }
   }, [theme])
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+    />
+  )
 }
