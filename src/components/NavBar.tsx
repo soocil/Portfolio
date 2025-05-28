@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Menu, X, Moon, Sun, SquareChevronRight } from "lucide-react"
+import { Menu, X, Moon, Sun, SquareChevronRight, Github, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 
@@ -32,7 +32,7 @@ export default function NavBar({ scrollToSection, aboutRef, projectsRef, skillsR
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b  backdrop-blur-lg ">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <motion.div
@@ -47,7 +47,7 @@ export default function NavBar({ scrollToSection, aboutRef, projectsRef, skillsR
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-6 ">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.name}
@@ -55,21 +55,41 @@ export default function NavBar({ scrollToSection, aboutRef, projectsRef, skillsR
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="hover:cursor-pointer text-sm font-medium transition-colors hover:text-primary"
               >
                 {item.name}
               </motion.button>
             ))}
           </nav>
+          
 
           <div className="flex items-center gap-2">
+            <a
+              href="https://www.linkedin.com/in/sushil-regmi-441965209/"
+              className="text-muted-foreground m-2 hover:text-foreground transition-colors"
+              aria-label="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Linkedin className="h-4 w-4" />
+            </a>
+            <a
+              href="https://github.com/sooocil"
+              className="text-muted-foreground m-2 hover:text-foreground transition-colors"
+              aria-label="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="h-4 w-4" />
+            </a>
             <Button
               variant="ghost"
+              className="md:inline-flex hover:cursor-pointer m-2"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "dark" : "light")}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "Dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
 
             {/* Mobile Menu Button */}
