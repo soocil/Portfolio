@@ -158,14 +158,6 @@ export default function Home() {
       icon: <SiAndroidstudio size={28} className="text-green-500" />,
     },
     {
-      name: "Java",
-      icon: <FaJava size={28} className="text-red-500" />,
-    },
-    {
-      name: "SQLite",
-      icon: <SiMysql size={28} className="text-blue-500" />,
-    },
-    {
       name: "Figma",
       icon: <LuFigma size={28} className="text-pink-500" />,
     },
@@ -177,10 +169,7 @@ export default function Home() {
       name: "Illustrator",
       icon: <SiAdobeillustrator size={28} className="text-orange-600" />,
     },
-    {
-      name: "Sketch",
-      icon: <SiSketch size={28} className="text-yellow-500" />,
-    },
+   
   ];
 
   // useEffect for updating name from random char animating to "Sushil Regmi"
