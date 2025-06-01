@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Octokit } from "@octokit/rest";
 
 interface Project {
   title: string;
@@ -14,6 +11,7 @@ interface Project {
   image: string;
   tags: string[];
   link: string;
+  isPrivate: boolean;
 }
 
 interface ProjectCardProps {
@@ -22,27 +20,6 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
-  
-  const [repos, setRepos] = useState<any[]>([]);
-
-
-  useEffect(() => {
-    const octokit = new Octokit();
-    const fetchRepos = async () => {
-      try {
-        const res = await octokit.rest.repos.listForUser({
-          username: "sooocil",
-        });
-        setRepos(res.data);
-        // You can now let the user choose which repo to take from `repos`
-      } catch (error) {
-        // handle error if needed
-      }
-    };
-    fetchRepos();
-  }, []);
-
-  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -51,27 +28,39 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       viewport={{ once: true }}
     >
       <Card className="overflow-hidden h-full flex flex-col group">
+        {/* Project Image */}
         <div className="relative h-48 overflow-hidden">
-          <div className="absolute ">
-            <img className="object-cover transition-transform duration-500 group-hover:scale-110" />
-          </div>
-          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-            <Button
-              size="icon"
-              variant="ghost"
-              className="text-white rounded-full"
+          <span
+            className={`absolute bottom-0 left-4 text-xs px-2 py-0.5 rounded border ${
+              project.isPrivate
+                ? "bg-zinc-800 text-zinc-200 border-zinc-600"
+                : "bg-zinc-200 text-zinc-800 border-zinc-300"
+            }`}
+          >
+            {project.isPrivate ? "Private Repo" : "Public Repo"}
+          </span>
+
+          {/* Overlay with GitHub link */}
+          <div className="absolute inset-0 bg-black/50  opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-4"
             >
-              <Github className="h-5 w-5" />
-            </Button>
-            <Button
-              size="icon"
-              variant="ghost"
-              className="text-white rounded-full"
-            >
-              <ExternalLink className="h-5 w-5" />
-            </Button>
+              <ExternalLink
+                size={50}
+                className="text-white hover:bg-slate-800 p-4 rounded-full "
+              />
+              <Github
+                size={50}
+                className="text-white  p-4 hover:bg-slate-800 rounded-full  "
+              />
+            </a>
           </div>
         </div>
+
+        {/* Card content */}
         <CardContent className="flex-1 flex flex-col p-6">
           <h3 className="text-xl font-bold mb-2">{project.title}</h3>
           <p className="text-muted-foreground mb-4 flex-1">
@@ -81,7 +70,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             {project.tags.map((tag, i) => (
               <span
                 key={i}
-                className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
+                className="text-xs px-3 py-1 rounded-full bg-indigo-600/20 text-primary"
               >
                 {tag}
               </span>
