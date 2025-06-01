@@ -102,7 +102,7 @@ export default function SocialContact() {
                 size="lg"
                 className="w-full justify-start gap-4 border relative fade-in-out duration-300  hover:border-gray-300"
               >
-                <Icon className={`w-5 h-5 ${link.color}`} />
+                <Icon className={`w-8 h-8 ${link.color}`} />
                 {isEmail ? (
                   <div className="flex items-center justify-between w-full">
                     <span className="font-medium text-green-600">

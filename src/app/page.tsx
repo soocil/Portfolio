@@ -10,7 +10,7 @@ import ProjectCard from "@/components/ProjectCard";
 import SocialContact from "@/components/SocialContact";
 import SkillBadge from "@/components/SkillBadge";
 import Footer from "@/components/Footer";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Dot, SquareChartGantt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IoLogoJavascript } from "react-icons/io";
 import {
@@ -34,6 +34,8 @@ import {
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 import { LuFigma } from "react-icons/lu";
+import ResumeButtons from "@/components/ResumeButtons";
+import { useTextScrambler } from "@/hooks/useTextScrambler"; // Adjust path as needed
 
 export default function Home() {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -53,7 +55,7 @@ export default function Home() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = "/profile.jpg";
+    img.src = "/Profile/profile2.jpg";
     img.onload = () => setImageLoaded(true);
     img.crossOrigin = "anonymous";
   }, []);
@@ -234,8 +236,6 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="w-full max-w-4xl mx-auto"
           >
-
-
             <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
               <div className="w-full lg:w-3/4 ">
                 <motion.h1
@@ -246,18 +246,7 @@ export default function Home() {
                 >
                   <span className="font-extrabold text-white tracking-tight cursor-default relative overflow-hidden inline-block">
                     {displayed}
-                    <span className="absolute top-10 left-0 h-full w-20 bg-white opacity-40 -skew-x-12 translate-x-[-100%] transition-transform duration-700 ease-in-out pointer-events-none" />
                   </span>
-
-                  <style jsx>{`
-                    span:hover > span {
-                      transform: translateX(500%) skewX(-40deg);
-                      opacity: 0;
-                      transition-property: transform, opacity;
-                      transition-timing-function: ease-in-out;
-                      transition-duration: 200ms;
-                    }
-                  `}</style>
                 </motion.h1>
 
                 <motion.div
@@ -284,14 +273,16 @@ export default function Home() {
 
                   <div className="pt-4 flex gap-4">
                     <Button
-                      variant="link"
+                      variant="outline"
                       size="default"
-                      className="hover:underline hover:cursor-pointer font-inter rounded-full text-zinc-200 hover:text-accent hover:bg-accent/10 transition-colors duration-200"
+                      className=" hover:cursor-pointer hover:bg-zinc-800 font-inter rounded-full text-zinc-200 hover:text-accent  transition-colors duration-200"
                       onClick={() => scrollToSection(projectsRef)}
                     >
+                      <SquareChartGantt />
                       View My Work
                     </Button>
 
+                    <ResumeButtons />
                     <Button
                       size="default"
                       className="hover:cursor-pointer font-inter hover:bg-zinc-900 text-zinc-900 border border-zinc-700 bg-zinc-100 hover:text-white hover:border-zinc-300 rounded-full"
@@ -304,18 +295,22 @@ export default function Home() {
               </div>
 
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.1 }}
                 animate={{
                   opacity: imageLoaded ? 1 : 0,
                   scale: imageLoaded ? 1 : 0.8,
                 }}
+                whileInView={{ scale: 1 }}
                 transition={{ duration: 0.5 }}
                 className="relative"
               >
-                <div className="w-28 h-28 md:w-36 md:h-36 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
+                <div
+                  className="w-28 h-32 md:w-40 md:h-36 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-primary/20 hover:scale-105 
+                            transition-transform duration-300 ease-in-out shadow-xl"
+                >
                   {imageLoaded ? (
                     <img
-                      src="/profile.jpg"
+                      src="/Profile/profile2.jpg"
                       alt="Sushil Regmi"
                       className="w-full h-full object-cover"
                     />
@@ -324,8 +319,10 @@ export default function Home() {
                   )}
                 </div>
 
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 md:w-10 md:h-10 bg-primary rounded-full flex items-center justify-center text-white">
-                  <span className="text-xs md:text-sm font-bold">3+</span>
+                <div className="absolute -bottom-1 -right-1 w-10 h-10 md:w-10 md:h-10 bg-primary rounded-full flex items-center justify-center ">
+                  <span className="text-xs md:text-sm font-bold">
+                    <Dot size={100} className="text-green-500" />
+                  </span>
                 </div>
               </motion.div>
             </div>
