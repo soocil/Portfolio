@@ -49,16 +49,17 @@ export default function NavBar({ scrollToSection, aboutRef, projectsRef, skillsR
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6 ">
             {navItems.map((item, index) => (
-              <motion.button
+                <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.ref)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="hover:cursor-pointer text-sm font-medium transition-colors hover:text-primary"
-              >
+                className="relative hover:cursor-pointer text-sm font-medium transition-colors hover:text-primary"
+                >
                 {item.name}
-              </motion.button>
+               
+                </motion.button>
             ))}
           </nav>
           

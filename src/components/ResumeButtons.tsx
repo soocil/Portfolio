@@ -15,7 +15,7 @@ const ResumeButtons = () => {
       >
         <Button
           variant="outline"
-          className="flex items-center hover:bg-zinc-800 hover:cursor-pointer gap-2 rounded-full"
+          className="dark:hover:text-white flex items-center hover:bg-zinc-800 hover:cursor-pointer gap-2 rounded-full"
         >
           <Eye className="w-4 h-4" />
           View Resume

@@ -8,30 +8,11 @@ import NavBar from "@/components/NavBar";
 import Scrollbar from "@/components/Scrollbar";
 import ProjectCard from "@/components/ProjectCard";
 import SocialContact from "@/components/SocialContact";
-import SkillBadge from "@/components/SkillBadge";
+import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
-import { ArrowDown, Dot, SquareChartGantt } from "lucide-react";
+import { ArrowDown, Dot, Phone, SquareChartGantt } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { IoLogoJavascript } from "react-icons/io";
-import {
-  SiTypescript,
-  SiReact,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiExpress,
-  SiMongodb,
-  SiGit,
-  SiTailwindcss,
-  SiShadcnui,
-  SiHtml5,
-  SiCss3,
-  SiTauri,
-  SiAndroidstudio,
-  SiMysql,
-  SiAdobeillustrator,
-  SiAdobephotoshop,
-  SiSketch,
-} from "react-icons/si";
+
 import { FaJava } from "react-icons/fa";
 import { LuFigma } from "react-icons/lu";
 import ResumeButtons from "@/components/ResumeButtons";
@@ -49,6 +30,7 @@ export default function Home() {
   const skillsRef = useRef<HTMLDivElement>(
     null
   ) as React.RefObject<HTMLDivElement>;
+
   const contactRef = useRef<HTMLDivElement>(
     null
   ) as React.RefObject<HTMLDivElement>;
@@ -96,80 +78,6 @@ export default function Home() {
       link: "https://github.com/sooocil/Lumo",
       isPrivate: true,
     },
-  ];
-
-  const skills = [
-    {
-      name: "HTML",
-      icon: <SiHtml5 size={28} className="text-orange-500" />,
-    },
-    {
-      name: "CSS",
-      icon: <SiCss3 size={28} className="text-blue-600" />,
-    },
-    {
-      name: "JavaScript",
-      icon: <IoLogoJavascript size={28} className="text-yellow-400" />,
-    },
-    {
-      name: "TypeScript",
-      icon: <SiTypescript size={28} className="text-blue-500" />,
-    },
-    {
-      name: "React",
-      icon: <SiReact size={28} className="text-cyan-400" />,
-    },
-    {
-      name: "Next.js",
-      icon: <SiNextdotjs size={28} className="text-black dark:text-white" />,
-    },
-    {
-      name: "Node.js",
-      icon: <SiNodedotjs size={28} className="text-green-600" />,
-    },
-    {
-      name: "ExpressJs",
-      icon: (
-        <SiExpress size={28} className="text-gray-700 dark:text-gray-200" />
-      ),
-    },
-    {
-      name: "MongoDB",
-      icon: <SiMongodb size={28} className="text-green-700" />,
-    },
-    {
-      name: "Git",
-      icon: <SiGit size={28} className="text-orange-200" />,
-    },
-    {
-      name: "Tailwind CSS",
-      icon: <SiTailwindcss size={28} className="text-sky-400" />,
-    },
-    {
-      name: "shadcn/ui",
-      icon: <SiShadcnui size={28} className="text-violet-500" />,
-    },
-    {
-      name: "Tauri",
-      icon: <SiTauri size={28} className="text-orange-400" />,
-    },
-    {
-      name: "Android Studio",
-      icon: <SiAndroidstudio size={28} className="text-green-500" />,
-    },
-    {
-      name: "Figma",
-      icon: <LuFigma size={28} className="text-pink-500" />,
-    },
-    {
-      name: "Photoshop",
-      icon: <SiAdobephotoshop size={28} className="text-blue-400" />,
-    },
-    {
-      name: "Illustrator",
-      icon: <SiAdobeillustrator size={28} className="text-orange-600" />,
-    },
-   
   ];
 
   // useEffect for updating name from random char animating to "Sushil Regmi"
@@ -242,7 +150,7 @@ export default function Home() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="text-xl text-muted-foreground font-raleway mt-2"
+                  className="text-xl text-muted-foreground font-sans mt-2"
                 >
                   Full Stack Developer
                 </motion.div>
@@ -253,18 +161,18 @@ export default function Home() {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="mt-6 space-y-4"
                 >
-                  <p className="text-justify text-muted-foreground leading-relaxed ">
+                  <p className="font-poppins text-justify text-muted-foreground leading-relaxed ">
                     I am a passionate full-stack developer with a focus on
                     building efficient and scalable web applications. I enjoy
                     working with modern technologies and continuously improving
-                    my skills to deliver high-quality software solutions.
+                    my skills.
                   </p>
 
                   <div className="pt-4 flex gap-4">
                     <Button
                       variant="outline"
                       size="default"
-                      className=" hover:cursor-pointer hover:bg-zinc-800 font-inter rounded-full text-zinc-200 hover:text-accent  transition-colors duration-200"
+                      className=" dark:hover:text-white hover:cursor-pointer hover:bg-zinc-800 font-inter rounded-full  hover:text-accent  transition-colors duration-200"
                       onClick={() => scrollToSection(projectsRef)}
                     >
                       <SquareChartGantt />
@@ -274,9 +182,10 @@ export default function Home() {
                     <ResumeButtons />
                     <Button
                       size="default"
-                      className="hover:cursor-pointer font-inter hover:bg-zinc-900 text-zinc-900 border border-zinc-700 bg-zinc-100 hover:text-white hover:border-zinc-300 rounded-full"
+                      className="dark:bg-zinc-700  dark:text-white hover:cursor-pointer font-inter hover:bg-zinc-900  border border-zinc-700  hover:text-white hover:border-zinc-300 rounded-full"
                       onClick={() => scrollToSection(contactRef)}
                     >
+                      <Phone />
                       Contact Me
                     </Button>
                   </div>
@@ -331,68 +240,9 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section ref={aboutRef} className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl font-bold mb-2 font-raleway text-shadow">
-                About Me
-              </h2>
-              <div className="w-20 h-1 bg-primary mx-auto"></div>
-            </motion.div>
-            <div className=" grid md:grid-cols-2 gap-12 ">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center text-center"
-              >
-                <h3 className="text-2xl font-bold mb-4 text-center font-montserrat">
-                  M<span className="bg-slate-100/10">y Journe</span>y
-                </h3>
-                <p className="text-justify align-middle min-w-20 max-w-1/2 mb-4 font-poppins font-light leading-relaxed">
-                  My journey in web development began 4 years ago. Since then,
-                  I've gained experience in both front-end and back-end
-                  development, building practical web applications. Currently, I
-                  working on my side projects. I focus on writing clean code and
-                  continuously learning.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                ref={skillsRef}
-                className="flex flex-col items-center text-center"
-              >
-                <h3 className="text-2xl font-bold mb-4 text-center font-montserrat">
-                  My Skills
-                </h3>
-                <div
-                  className="grid 
-                grid-cols-4 sm:grid-cols-4 md:grid-cols-4  gap-4 max-w-4xl mx-auto"
-                >
-                  {skills.map((skill, index) => (
-                    <SkillBadge
-                      key={index}
-                      name={skill.name}
-                      icon={skill.icon}
-                      index={index}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+        <div ref={aboutRef}>
+          <AboutSection skillsRef={skillsRef} />
+        </div>
 
         {/* Projects Section */}
         <section ref={projectsRef} className="py-20">
